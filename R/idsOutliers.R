@@ -22,7 +22,8 @@ outlierKD2 <- function(df, var, rm=FALSE, boxplt=FALSE, histogram=TRUE, qqplt=FA
     var_name <- eval(substitute(var),eval(dt))
     na1 <- sum(is.na(var_name))
     m1 <- mean(var_name, na.rm = T)
-    par(mfrow=c(2, boxplt+histogram+qqplt), oma=c(0,0,3,0))
+    colTotal <- boxplt+histogram+qqplt
+    par(mfrow=c(2, max(2,colTotal)), oma=c(0,0,3,0)) # fixed issue with only 0 or 1 chart selected
     if (qqplt) {
       qqnorm(var_name, main = "With outliers")
       qqline(var_name)
@@ -40,14 +41,16 @@ outlierKD2 <- function(df, var, rm=FALSE, boxplt=FALSE, histogram=TRUE, qqplt=FA
     if (histogram) { hist(var_name, main="Without outliers", xlab=NA, ylab=NA) }
     if (boxplt) { boxplot(var_name, main="Without outliers") }
 
-    title("Outlier Check", outer=TRUE)
-    na2 <- sum(is.na(var_name))
-    cat("Outliers identified:", na2 - na1, "\n")
-    cat("Propotion (%) of outliers:", round((na2 - na1) / sum(!is.na(var_name))*100, 1), "\n")
-    cat("Mean of the outliers:", round(mo, 2), "\n")
-    m2 <- mean(var_name, na.rm = T)
-    cat("Mean without removing outliers:", round(m1, 2), "\n")
-    cat("Mean if we remove outliers:", round(m2, 2), "\n")
+    if(colTotal > 0) {  # if no charts are wanted, skip this section
+      title("Outlier Check", outer=TRUE)
+      na2 <- sum(is.na(var_name))
+      cat("Outliers identified:", na2 - na1, "\n")
+      cat("Propotion (%) of outliers:", round((na2 - na1) / sum(!is.na(var_name))*100, 1), "\n")
+      cat("Mean of the outliers:", round(mo, 2), "\n")
+      m2 <- mean(var_name, na.rm = T)
+      cat("Mean without removing outliers:", round(m1, 2), "\n")
+      cat("Mean if we remove outliers:", round(m2, 2), "\n")
+    }
 
     # response <- readline(prompt="Do you want to remove outliers and to replace with NA? [yes/no]: ")
     # if(response == "y" | response == "yes"){
