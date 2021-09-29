@@ -18,28 +18,30 @@
 #'   mydfnew = outlierKD2(mydf, height, TRUE)
 #' @export
 outlierKD2 <- function(df, var, rm=FALSE, boxplt=FALSE, histogram=TRUE, qqplt=FALSE) {
-    dt = df # duplicate the dataframe for potential alteration
-    var_name <- eval(substitute(var),eval(dt))
-    na1 <- sum(is.na(var_name))
-    m1 <- mean(var_name, na.rm = T)
-    par(mfrow=c(2, boxplt+histogram+qqplt), oma=c(0,0,3,0))
-    if (qqplt) {
-      qqnorm(var_name, main = "With outliers")
-      qqline(var_name)
-    }
-    if (histogram) { hist(var_name, main="With outliers", xlab=NA, ylab=NA) }
-    if (boxplt) { boxplot(var_name, main="With outliers") }
+  dt = df # duplicate the dataframe for potential alteration
+  var_name <- eval(substitute(var),eval(dt))
+  na1 <- sum(is.na(var_name))
+  m1 <- mean(var_name, na.rm = T)
+  colTotal <- boxplt+histogram+qqplt
+  par(mfrow=c(2, max(2,colTotal)), oma=c(0,0,3,0)) # fixed issue with only 0 or 1 chart selected
+  if (qqplt) {
+    qqnorm(var_name, main = "With outliers")
+    qqline(var_name)
+  }
+  if (histogram) { hist(var_name, main="With outliers", xlab=NA, ylab=NA) }
+  if (boxplt) { boxplot(var_name, main="With outliers") }
 
-    outlier <- boxplot.stats(var_name)$out
-    mo <- mean(outlier)
-    var_name <- ifelse(var_name %in% outlier, NA, var_name)
-    if (qqplt) {
-      qqnorm(var_name, main = "Without outliers")
-      qqline(var_name)
-    }
-    if (histogram) { hist(var_name, main="Without outliers", xlab=NA, ylab=NA) }
-    if (boxplt) { boxplot(var_name, main="Without outliers") }
+  outlier <- boxplot.stats(var_name)$out
+  mo <- mean(outlier)
+  var_name <- ifelse(var_name %in% outlier, NA, var_name)
+  if (qqplt) {
+    qqnorm(var_name, main = "Without outliers")
+    qqline(var_name)
+  }
+  if (histogram) { hist(var_name, main="Without outliers", xlab=NA, ylab=NA) }
+  if (boxplt) { boxplot(var_name, main="Without outliers") }
 
+  if(colTotal > 0) {  # if no charts are wanted, skip this section
     title("Outlier Check", outer=TRUE)
     na2 <- sum(is.na(var_name))
     cat("Outliers identified:", na2 - na1, "\n")
@@ -48,18 +50,19 @@ outlierKD2 <- function(df, var, rm=FALSE, boxplt=FALSE, histogram=TRUE, qqplt=FA
     m2 <- mean(var_name, na.rm = T)
     cat("Mean without removing outliers:", round(m1, 2), "\n")
     cat("Mean if we remove outliers:", round(m2, 2), "\n")
+  }
 
-    # response <- readline(prompt="Do you want to remove outliers and to replace with NA? [yes/no]: ")
-    # if(response == "y" | response == "yes"){
-    if(rm){
-        dt[as.character(substitute(var))] <- invisible(var_name)
-        #assign(as.character(as.list(match.call())$dt), dt, envir = .GlobalEnv)
-        cat("Outliers successfully removed", "\n")
-        return(invisible(dt))
-    } else {
-        cat("Nothing changed", "\n")
-        return(invisible(df))
-    }
+  # response <- readline(prompt="Do you want to remove outliers and to replace with NA? [yes/no]: ")
+  # if(response == "y" | response == "yes"){
+  if(rm){
+    dt[as.character(substitute(var))] <- invisible(var_name)
+    #assign(as.character(as.list(match.call())$dt), dt, envir = .GlobalEnv)
+    cat("Outliers successfully removed", "\n")
+    return(invisible(dt))
+  } else {
+    cat("Nothing changed", "\n")
+    return(invisible(df))
+  }
 }
 
 

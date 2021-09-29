@@ -1,6 +1,6 @@
 Package: ezids
 Title: Intro DS 6101 EZ-Helper functions
-Version: 0.1.2021.09.05
+Version: 0.1.2021.09.26
 Authors@R: 
     person(given = "Edwin",
            family = "Lo",
