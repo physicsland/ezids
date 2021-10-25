@@ -1,16 +1,16 @@
 # making these functions as a package
 # https://swcarpentry.github.io/r-novice-inflammation/08-making-packages-R/
 # https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html
-# v 0.1.2020.10
+# v 0.1.2020.11
 
 
 #' Combining base::summary, xtable, and kableExtra, to easily display model summary.
 #' wrapper for the base::summary function on model objects
 #' Can also use as head/tail for nicer display
 #' ELo 202004 GWU DATS
-#' version 1.2
+#' version 1.2.2
 #' @param modelsmmrytable This can be a generic table, a model object such as lm(), or the summary of a model object summary(lm())
-#' @param title Title of table.
+#' @param title Title of table. If modelsmmrytable has a "formula", it will be the default title
 #' @param digits Number of digits to display
 #' @param pos Position of table, c("left","center","right")
 #' @param bso bootstrap_options = c("basic", "striped", "bordered", "hover", "condensed", "responsive")
@@ -20,9 +20,21 @@
 #' xkabledply( df, title="Table testing", pos="left", bso="hover" )
 #' xkabledply( ISLR::Hitters[1:5,] )
 #' @export
-xkabledply <- function(modelsmmrytable, title="Table", digits = 4, pos="left", bso="striped", wide=FALSE) {
+xkabledply <- function(modelsmmrytable, title="", digits = 4, pos="left", bso="striped", wide=FALSE) {
+  wtitle = stringr::str_trim(title) # working title
+  if (wtitle=="") {
+    trytitle <- tryCatch(
+      {
+        tmp <- formula(modelsmmrytable) # typically works for model objects and summary(model) objects
+        wtitle <- paste("Model:", format(tmp) )
+      },
+      error=function(cond){ return("no-formula-error") }
+    )
+
+    if (trytitle == "no-formula-error") { wtitle <- "Table" }
+  }
   if (wide) { modelsmmrytable <- t(modelsmmrytable) }
-    kableExtra::kable_styling( kableExtra::kable( xtable::xtable( modelsmmrytable ) , caption = title, digits = digits) , bootstrap_options = bso, full_width = FALSE, position = pos)
+  kableExtra::kable_styling( kableExtra::kable( xtable::xtable( modelsmmrytable ) , caption = wtitle, digits = digits) , bootstrap_options = bso, full_width = FALSE, position = pos)
 }
 
 #' Better display than the default head() function
