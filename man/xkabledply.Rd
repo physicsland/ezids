@@ -6,11 +6,11 @@
 wrapper for the base::summary function on model objects
 Can also use as head/tail for nicer display
 ELo 202004 GWU DATS
-version 1.2}
+version 1.2.2}
 \usage{
 xkabledply(
   modelsmmrytable,
-  title = "Table",
+  title = "",
   digits = 4,
   pos = "left",
   bso = "striped",
@@ -20,7 +20,7 @@ xkabledply(
 \arguments{
 \item{modelsmmrytable}{This can be a generic table, a model object such as lm(), or the summary of a model object summary(lm())}
 
-\item{title}{Title of table.}
+\item{title}{Title of table. If modelsmmrytable has a "formula", it will be the default title}
 
 \item{digits}{Number of digits to display}
 
@@ -38,7 +38,7 @@ Combining base::summary, xtable, and kableExtra, to easily display model summary
 wrapper for the base::summary function on model objects
 Can also use as head/tail for nicer display
 ELo 202004 GWU DATS
-version 1.2
+version 1.2.2
 }
 \examples{
 xkabledply( df, title="Table testing", pos="left", bso="hover" )

@@ -1,6 +1,6 @@
 Package: ezids
 Title: Intro DS 6101 EZ-Helper functions
-Version: 0.1.2021.09.26
+Version: 0.1.2021.11.01
 Authors@R: 
     person(given = "Edwin",
            family = "Lo",
@@ -12,7 +12,7 @@ License: `use_mit_license()`
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports:
     xtable,
 	  kableExtra,
@@ -20,4 +20,3 @@ Imports:
 	  faraway
 Suggests:
     ISLR
-
