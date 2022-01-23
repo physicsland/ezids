@@ -26,16 +26,16 @@ install.packages('svglite')
 Install the development version from Github:
 
 
-## install remotes if not already
+### install remotes if not already
 if (!requireNamespace("remotes", quietly = TRUE)) {
   install.packages("remotes")
 }
 
-## install devtools if not already 
+### install devtools if not already 
 install.packages ("devtools)
 
 
-## install ezids from github
+### install ezids from github
 devtools::install_github("physicsland/ezids")
 
 ## Authorization
