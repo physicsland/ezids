@@ -105,7 +105,8 @@ xkablesummary <- function(df, title="Table: Statistics summary.", digits = 4, po
 #' @export
 xkablevif <- function(model, title="VIFs of the model", digits = 3, pos="left", bso="striped", wide=TRUE) {
   vifs = table( names(model$coefficients)[2:length(model$coefficients)] ) # remove intercept to set column names
-  vifs[] = faraway::vif(model) # set the values
+  vif_res = faraway::vif(model) # calculate vifs
+  vifs[] = vif_res[order(names(vif_res))] # set the values after sorting by variable names
   if (wide) { vifs <- t(vifs) }
   xkabledply( vifs, title=title, digits = digits, pos=pos, bso=bso )
 }
