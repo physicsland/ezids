@@ -9,9 +9,14 @@
 #' table names can be in this list ('AStudentRecord','BikeShare','Dats_grades','Diet6wk','Happy','gapminder','gradAdmit','nfl2008_fga','Pizza','Titanic','USDANutrient','GSS_demographics','AAPL_daily','AAPL_full','GOOG_full','GOOG_daily','MSFT_daily','MSFT_full','GSS_demographics_xlsx','World1','World2');
 #' @export
 api_rfit <- function(table) {
-  url = 'http://api.regression.fit/endpt.json'
-  apikey = 'K35wHcKuwXuhHTaz7zY42rCje'
+  url = "http://api.regression.fit/endpt.json"
+  apikey = "K35wHcKuwXuhHTaz7zY42rCje"
   res = httr::GET(url,query = list(apikey=apikey, table=table)) # typically getting a json object
-  df = jsonlite::fromJSON(rawToChar(res$content))
+  df = type.convert(
+    jsonlite::fromJSON(rawToChar(res$content)),
+    na.strings = "NA",
+    as.is = TRUE,
+    dec = "."
+  )
   return(df)
 }
