@@ -4,11 +4,11 @@
 \alias{xkablevif}
 \title{Combining faraway::vif, xtable, and kableExtra, to easily display numeric summary of VIFs for a model.
 ELo 202004 GWU DATS
-version 1.2}
+version 1.3}
 \usage{
 xkablevif(
   model,
-  title = "VIFs of the model",
+  title = "",
   digits = 3,
   pos = "left",
   bso = "striped",
@@ -34,7 +34,7 @@ The HTML summary table of the VIFs for a model for display, or for knitr to proc
 \description{
 Combining faraway::vif, xtable, and kableExtra, to easily display numeric summary of VIFs for a model.
 ELo 202004 GWU DATS
-version 1.2
+version 1.3
 }
 \examples{
 xkablevif( lm(Salary~Hits+RBI, data=ISLR::Hitters), wide=T )

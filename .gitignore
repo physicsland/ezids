@@ -1,3 +1,12 @@
+# optional
+# for MacOS system files
+.DS_Store
+Icon
+Icon?
+# for VS code configs
+*.code-workspace
+.vscode/*
+
 # History files
 .Rhistory
 .Rapp.history

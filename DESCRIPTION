@@ -1,13 +1,13 @@
 Package: ezids
-Title: Intro DS 6101 EZ-Helper functions
-Version: 0.1.2022.06.07
+Title: Intro to DS classes EZ-Helper functions at The George Washington University
+Version: 0.1.2022.07.10
 Authors@R: 
     person(given = "Edwin",
            family = "Lo",
            role = c("aut", "cre"),
            email = "edwinlo@gwu.edu",
            comment = c("TBD"))
-Description: EZ-Helper functions for the class DATS 6101 at The George Washington University
+Description: EZ-Helper functions for the intro data science classes at The George Washington University
 License: `use_mit_license()`
 Encoding: UTF-8
 LazyData: true

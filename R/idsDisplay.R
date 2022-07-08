@@ -93,7 +93,7 @@ xkablesummary <- function(df, title="Table: Statistics summary.", digits = 4, po
 
 #' Combining faraway::vif, xtable, and kableExtra, to easily display numeric summary of VIFs for a model.
 #' ELo 202004 GWU DATS
-#' version 1.2
+#' version 1.3
 #' @param model The lm or compatible model object.
 #' @param title Title of table.
 #' @param digits Number of digits to display
@@ -103,11 +103,23 @@ xkablesummary <- function(df, title="Table: Statistics summary.", digits = 4, po
 #' @return The HTML summary table of the VIFs for a model for display, or for knitr to process into other formats
 #' @examples xkablevif( lm(Salary~Hits+RBI, data=ISLR::Hitters), wide=T )
 #' @export
-xkablevif <- function(model, title="VIFs of the model", digits = 3, pos="left", bso="striped", wide=TRUE) {
+xkablevif <- function(model, title="", digits = 3, pos="left", bso="striped", wide=TRUE) {
+  wtitle = stringr::str_trim(title) # working title
+  if (wtitle == "") {
+    trytitle <- tryCatch({
+      tmp <- formula(model)
+      wtitle <- paste("VIFs of Model:", format(tmp))
+    }, error = function(cond) {
+      return("no-formula-error")
+    })
+    if (trytitle == "no-formula-error") {
+      wtitle <- "VIFs of the model."
+    }
+  }
   vifs = table( names(model$coefficients)[2:length(model$coefficients)] ) # remove intercept to set column names
   vif_res = faraway::vif(model) # calculate vifs
   vifs[] = vif_res[order(names(vif_res))] # set the values after sorting by variable names
   if (wide) { vifs <- t(vifs) }
-  xkabledply( vifs, title=title, digits = digits, pos=pos, bso=bso )
+  xkabledply( vifs, title=wtitle, digits = digits, pos=pos, bso=bso )
 }
 

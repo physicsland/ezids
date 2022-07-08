@@ -1,27 +1,31 @@
 # Ezids Package 
 
+An R package providing easy to use formatting and other helper functions. 
+This package is created for students enrolled in an Introductory Data Science 
+courses (DATS-1001 / DATS-6101) at The George Washington University.
 
-An R package providing easy to use formatting functions. This package is created for students enrolled in the Introduction to Data Science (DATS-6101) course at the George Washington University.
+## Contributors
+
++ Dr. Edwin Lo (George Washington University)
++ Dr. Divya Pandove (George Washington University) 
+
+### Community contributors
+
++ Mark Febrizio
+
+### Acknowledgments
+
+The outlier function here is modified from the outlierKD function authored by
+[Klodian Dhana](https://www.r-bloggers.com/identify-describe-plot-and-remove-the-outliers-from-the-dataset/).
 
 
-## Prerequisites 
+## Dependencies 
 
-Please install the packages listed below before you install Ezids: 
-
-install.packages('faraway') 
-
-install.packages('xtable') 
-
-install.packages('kableExtra') 
-
-install.packages('stringr') 
-
-install.packages('svglite') 
-
+The packages listed below are needed to run ezids. They will be installed as dependencies:  
+faraway, xtable, kableExtra, stringr, svglite  
 
 
 ## Install
-
 
 Install the development version from Github:
 
@@ -63,6 +67,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
+## Change Log
+
++ 2022-07-08 Modified xkablevif() function with dynamic default title
++ 2022-05-24 Added api_rfit() function
++ 2022-05-05 Various minor fixes by mfebrizio
 
 
 
