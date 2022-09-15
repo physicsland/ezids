@@ -21,6 +21,10 @@ version 1.0
 }
 \examples{
 api_rfit( 'gapminder' )
-table names can be in this list ('AStudentRecord','BikeShare','Dats_grades','Diet6wk','Happy','gapminder','gradAdmit','nfl2008_fga','Pizza','Titanic','USDANutrient','GSS_demographics','AAPL_daily','AAPL_full','GOOG_full','GOOG_daily','MSFT_daily','MSFT_full','GSS_demographics_xlsx','World1','World2');
+table names can be in this list ('AStudentRecord','BikeShare','Dats_grades',
+'Diabetes','Diet6wk','Happy','gapminder','gradAdmit','nfl2008_fga','Pizza',
+'Titanic','USDANutrient','GSS_demographics',
+'AAPL_daily','AAPL_full','GOOG_full','GOOG_daily',
+'MSFT_daily','MSFT_full','GSS_demographics_xlsx');
 updated list can also be found at https://api.regression.fit/endpt.json
 }
