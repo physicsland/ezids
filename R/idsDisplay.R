@@ -23,15 +23,9 @@
 xkabledply <- function(modelsmmrytable, title="", digits = 4, pos="left", bso="striped", wide=FALSE) {
   wtitle = stringr::str_trim(title) # working title
   if (wtitle=="") {
-    trytitle <- tryCatch(
-      {
-        tmp <- formula(modelsmmrytable) # typically works for model objects and summary(model) objects
-        wtitle <- paste("Model:", format(tmp) )
-      },
-      error=function(cond){ return("no-formula-error") }
-    )
-
-    if (trytitle == "no-formula-error") { wtitle <- "Table" }
+    try( { fmtfrmula = format(formula(modelsmmrytable)) # typically works for model objects and summary(model) objects
+    if (length(fmtfrmula) == 1) { wtitle <- paste("Model:", fmtfrmula )} }, silent = TRUE )
+    if (wtitle == "") { wtitle <- "Table" }
   }
   if (wide) { modelsmmrytable <- t(modelsmmrytable) }
   kableExtra::kable_styling( kableExtra::kable( xtable::xtable( modelsmmrytable ) , caption = wtitle, digits = digits) , bootstrap_options = bso, full_width = FALSE, position = pos)
@@ -106,15 +100,9 @@ xkablesummary <- function(df, title="Table: Statistics summary.", digits = 4, po
 xkablevif <- function(model, title="", digits = 3, pos="left", bso="striped", wide=TRUE) {
   wtitle = stringr::str_trim(title) # working title
   if (wtitle == "") {
-    trytitle <- tryCatch({
-      tmp <- formula(model)
-      wtitle <- paste("VIFs of Model:", format(tmp))
-    }, error = function(cond) {
-      return("no-formula-error")
-    })
-    if (trytitle == "no-formula-error") {
-      wtitle <- "VIFs of the model."
-    }
+    try( { fmtfrmula = format(formula(model)) 
+    if (length(fmtfrmula) == 1) { wtitle <- paste("VIFs of Model:", fmtfrmula)} } , silent = TRUE )
+    if (wtitle == "") { wtitle <- "VIFs of the model." }
   }
   vifs = table( names(model$coefficients)[2:length(model$coefficients)] ) # remove intercept to set column names
   vif_res = faraway::vif(model) # calculate vifs

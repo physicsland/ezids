@@ -1,6 +1,6 @@
 Package: ezids
 Title: Intro to DS classes EZ-Helper functions at The George Washington University
-Version: 0.1.2022.09.15
+Version: 0.1.2022.11.08
 Authors@R: 
     person(given = "Edwin",
            family = "Lo",

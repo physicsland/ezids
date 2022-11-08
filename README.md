@@ -69,6 +69,7 @@ SOFTWARE.
 
 ## Change Log
 
++ 2022-11-08 Fix display functions with long-formula errors
 + 2022-07-08 Modified xkablevif() function with dynamic default title
 + 2022-05-24 Added api_rfit() function
 + 2022-05-05 Various minor fixes by mfebrizio
