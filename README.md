@@ -69,6 +69,7 @@ SOFTWARE.
 
 ## Change Log
 
++ 2023-09-12 Fix xkablesummary function with changes in rlang and stringr
 + 2022-11-08 Fix display functions with long-formula errors
 + 2022-07-08 Modified xkablevif() function with dynamic default title
 + 2022-05-24 Added api_rfit() function

@@ -62,7 +62,7 @@ xkabledplytail <- function(df, rows=5, title="Tail", digits = 4, pos="left", bso
 
 #' Combining base::summary, xtable, and kableExtra, to easily display numeric variable summary of dataframes.
 #' ELo 202004 GWU DATS
-#' version 1.2
+#' version 1.3
 #' @param df The dataframe.
 #' @param title Title of table.
 #' @param digits Number of digits to display
@@ -74,8 +74,8 @@ xkabledplytail <- function(df, rows=5, title="Tail", digits = 4, pos="left", bso
 #' @export
 xkablesummary <- function(df, title="Table: Statistics summary.", digits = 4, pos="left", bso="striped") {
   s = summary(df)
-  apply( s, 2, function(x) stringr::str_remove_all(x,c("Min.\\s*:\\s*","1st Qu.\\s*:\\s*","Median\\s*:\\s*","Mean\\s*:\\s*","3rd Qu.\\s*:\\s*","Max.\\s*:\\s*")) ) # %>% # replace all leading words
-  apply( s, 2, function(x) stringr::str_trim(x, "right")) # trim trailing spaces left
+  # s = apply( s, 2, function(x) stringr::str_remove_all(x,c("Min.\\s*:\\s*","1st Qu.\\s*:\\s*","Median\\s*:\\s*","Mean\\s*:\\s*","3rd Qu.\\s*:\\s*","Max.\\s*:\\s*", "NA's\\s*:\\s*")) ) # %>% # replace all leading words
+  # s = apply( s, 2, function(x) stringr::str_trim(x, "right")) # trim trailing spaces left
 
   colnames(s) <- stringr::str_trim(colnames(s))
 
@@ -100,7 +100,7 @@ xkablesummary <- function(df, title="Table: Statistics summary.", digits = 4, po
 xkablevif <- function(model, title="", digits = 3, pos="left", bso="striped", wide=TRUE) {
   wtitle = stringr::str_trim(title) # working title
   if (wtitle == "") {
-    try( { fmtfrmula = format(formula(model)) 
+    try( { fmtfrmula = format(formula(model))
     if (length(fmtfrmula) == 1) { wtitle <- paste("VIFs of Model:", fmtfrmula)} } , silent = TRUE )
     if (wtitle == "") { wtitle <- "VIFs of the model." }
   }

@@ -5,11 +5,7 @@
 #' @return dataframe
 #' @examples
 #' api_rfit( 'gapminder' )
-#' table names can be in this list ('AStudentRecord','BikeShare','Dats_grades',
-#' 'Diabetes','Diet6wk','Happy','gapminder','gradAdmit','nfl2008_fga','Pizza',
-#' 'Titanic','USDANutrient','GSS_demographics',
-#' 'AAPL_daily','AAPL_full','GOOG_full','GOOG_daily',
-#' 'MSFT_daily','MSFT_full','GSS_demographics_xlsx');
+#' table names can be in this list ("AAPL_daily", "AAPL_full", "AStudentRecord", "bank", "BaseballHeightWeight", "BikeShare", "Credit", "Dats_grades", "DC_py", "Diabetes", "Diet6wk", "faithful", "framinghamHD", "gapminder", "GOOG_daily", "GOOG_full", "gradAdmit", "GSS_demographics", "GSS_demographics_xlsx", "Happy", "housing", "MSFT_daily", "MSFT_full", "nfl2008_fga", "nybirths", "pima", Pizza, "Titanic", "USDANutrient", "VideoGames", "vlbw");
 #' updated list can also be found at https://api.regression.fit/endpt.json
 #' @export
 api_rfit <- function(table) {
