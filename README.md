@@ -36,7 +36,7 @@ if (!requireNamespace("remotes", quietly = TRUE)) {
 }
 
 ### Install devtools if not already 
-install.packages ("devtools)
+install.packages ("devtools")
 
 
 ### Install ezids from github
